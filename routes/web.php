@@ -5,7 +5,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Video;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -103,11 +103,36 @@ Route::get('/', function () {
     // dd($video->tags);
 
     // 5
-    $tag = Tag::find(2);
-    $tag->videos()->create([
-        "title" => "video title 2"
-    ]);
-    dd($tag->videos);
+    // $tag = Tag::find(2);
+    // $tag->videos()->create([
+    //     "title" => "video title 2"
+    // ]);
+    // dd($tag->videos);
 
+
+
+    //////////////// other ////////////////
+    $posts = Post::all();
+
+    return view('welcome', compact("posts"));
+});
+
+Route::post('/', function (HttpRequest $request) {
+    $post = Post::firstOrNew(["name" => $request->name]);
+    $post->name = $request->name;
+    $post->save();
+    
+    $list = [];
+    if( isset($request->data) ){
+        foreach ($request->data as $key => $value) {
+            $tag = Tag::firstOrNew(["name" => $key]);
+            $tag->name = $key;
+            $list[] = $tag;
+        }
+    }
+    $tag2 = Tag::firstOrNew(["name" => $request->tagnameRaw]);
+    $tag2->name = $request->tagnameRaw;
+    $list[] = $tag2;
+    $post->tags()->saveMany($list);
     return view('welcome');
 });

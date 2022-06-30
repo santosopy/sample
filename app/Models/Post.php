@@ -9,15 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["user_id", "title"];
-
-    public function comments(){
-        return $this->morphMany(Comment::class, "commentable");
-    }
-
-    public function comment(){
-        return $this->morphOne(Comment::class, "commentable")->latest();
-    }
+    protected $fillable = ["name"];
 
     public function tags(){
         return $this->morphToMany(Tag::class, "taggable");
