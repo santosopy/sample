@@ -1,11 +1,5 @@
 <?php
 
-use App\Models\Comment;
-use App\Models\Post;
-use App\Models\Tag;
-use App\Models\User;
-use App\Models\Video;
-use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,120 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
-    //////////////// one to many ////////////////
-    // 1
-    // $user = User::create([
-    //     "name" => "test name",
-    //     "email" => "test@email.com",
-    //     "password" => Hash::make("1234"),
-    // ]);
-    
-    // $post = Post::create([
-    //     "user_id" => $user->id,
-    //     "title" => "example title"
-    // ]);
-    
-    // $post->comments()->create([
-    //     "user_id" => $user->id,
-    //     "body" => "comment for post"
-    // ]);
-
-
-    // 2
-    // $post = Post::find(1);
-
-    // $post->comments()->create([
-    //     "user_id" => 1,
-    //     "body" => "second commet"
-    // ]);
-
-    // 3
-    // $video = Video::create([
-    //     "title" => "example video title"
-    // ]);
-    
-    // $video->comments()->create([
-    //     "user_id" => 1,
-    //     "body" => "comment for video"
-    // ]);
-
-    // 4
-    // $comment = Comment::find(3);
-
-    // dd($comment->commentable);
-
-    // 5
-    // $post = Post::find(1);
-    
-    // dd($post->comment);
-
-    //////////////// many to many ////////////////
-    // 1
-    // $post = Post::create([
-    //     "user_id" => 1,
-    //     "title" => "post title 1"
-    // ]);
-    
-    // $post->tags()->create([
-    //     "name" => "laravel"
-    // ]);
-
-    // 2
-    // $post = Post::find(1);
-
-    // $tag = Tag::create([
-    //     "name" => "PHP"
-    // ]);
-
-    // $post->tags()->attach($tag);
-
-    // 3
-    // $video = Video::create([
-    //     "title" => "video title 1"
-    // ]);
-
-    // $tag = Tag::find(2);
-
-    // $video->tags()->attach($tag);
-
-    // 4
-    // $video = Video::find(2);
-
-    // dd($video->tags);
-
-    // 5
-    // $tag = Tag::find(2);
-    // $tag->videos()->create([
-    //     "title" => "video title 2"
-    // ]);
-    // dd($tag->videos);
-
-
-
-    //////////////// other ////////////////
-    $posts = Post::all();
-
-    return view('welcome', compact("posts"));
+    return view('welcome');
 });
 
-Route::post('/', function (HttpRequest $request) {
-    $post = Post::firstOrNew(["name" => $request->name]);
-    $post->name = $request->name;
-    $post->save();
-    
-    $list = [];
-    if( isset($request->data) ){
-        foreach ($request->data as $key => $value) {
-            $tag = Tag::firstOrNew(["name" => $key]);
-            $tag->name = $key;
-            $list[] = $tag;
-        }
-    }
-    $tag2 = Tag::firstOrNew(["name" => $request->tagnameRaw]);
-    $tag2->name = $request->tagnameRaw;
-    $list[] = $tag2;
-    $post->tags()->saveMany($list);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-    return redirect()->back();
-});
+require __DIR__.'/auth.php';
