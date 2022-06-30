@@ -134,5 +134,6 @@ Route::post('/', function (HttpRequest $request) {
     $tag2->name = $request->tagnameRaw;
     $list[] = $tag2;
     $post->tags()->saveMany($list);
-    return view('welcome');
+
+    return redirect()->back();
 });
