@@ -17,8 +17,7 @@ return new class extends Migration
             $table->bigInteger("tag_id");
             $table->bigInteger("taggable_id");
             $table->string("taggable_type");
-            $table->unique(["capacitable_type", "capacitable_id", "date"], 'plan_date_unique');
-
+            // $table->unique(["taggable_type", "taggable_id"], 'plan_date_unique');
         });
     }
 
