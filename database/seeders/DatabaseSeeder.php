@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,5 +22,11 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // $posts = Post::factory(3)->create();
+        // $tags = Tag::factory(5)->create();
+        // foreach ($posts as $key => $post) {
+        //     $post->tags()->saveMany($tags);
+        // }
     }
 }
