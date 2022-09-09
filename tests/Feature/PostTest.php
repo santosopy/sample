@@ -36,5 +36,11 @@ class PostTest extends TestCase
     public function test_user_can_send_post_with_tag()
     {
         $this->assertInstanceOf(Collection::class, $this->tag->posts);
+
+        // $this->post->tags->attach($this->tag);
+        // $this->assertInstanceOf(Collection::class, $this->post->tags);
+        // $this->assertInstanceOf(Tag::class, $this->post->tags->first());
+        // $this->assertEquals($this->tag->id, $this->post->tags->first()->id);
+
     }
 }
