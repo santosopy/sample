@@ -18,6 +18,7 @@
         "tailwindcss": "^1.9.6"
     },
     "dependencies": {
-        "tw-elements": "^1.0.0-alpha12"
+        "tw-elements": "^1.0.0-alpha12",
+        "vercel-php": "^0.5.2"
     }
 }
