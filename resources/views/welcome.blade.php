@@ -9,6 +9,7 @@
 
 <body class="antialiased">
     <div class="container mx-auto py-6">
+        <h1>CRUD</h1>
         {{ Form::open(['url' => '#', 'method' => 'post', 'class' => 'w-full max-w-sm']) }}
         <div class="md:flex md:items-center mb-6">
             <div class="md:w-1/3">
